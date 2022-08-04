@@ -1,5 +1,5 @@
 import { NextApiRequest,NextApiResponse } from "next";
-import {prisma}  from '../../db/client'
+import {prisma}  from '../../../db/client'
 
 export default async (req: NextApiRequest, res:NextApiResponse)=>{
     const user = req.query["user"];
@@ -27,5 +27,5 @@ if(!user || typeof user !=="string"){
         return;
     }
 
-    return  res.send(JSON.stringify({mesasge:`user ${data.firstName} was created at ${data.createdAt}`}))
+    return  res.json(data)
 }
