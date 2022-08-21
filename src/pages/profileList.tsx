@@ -2,15 +2,16 @@ import { SharedInfoTag } from "@prisma/client";
 import { useEffect, useState } from "react";
 
 import { prisma } from "../db/client";
+import styled from "styled-components";
 
-interface users {
-  users: Array<SharedInfoTag>,
-}
 export function ProfileList(users: any) {
   const [userProfiles, setUserProfiles] = useState({});
 
-  const listings = users.users.map((user: SharedInfoTag) => (
+  console.log(users);
+  const listings = users.users.map((user: any) => (
     <div>
+      <div>Name : {user.name}</div>
+      <div>Users Helped: {user.served}</div>
       <div>Description: {user.description}</div>
       <div>Rating: {user.rating}</div>
     </div>
@@ -26,9 +27,13 @@ export function ProfileList(users: any) {
 
 export const getServerSideProps = async () => {
   const users = await prisma.sharedInfoTag.findMany({
-    where: {
-      available: true,
-    },
+    where:{
+      user:{
+        name:"Joseph Cisneros"
+      }
+    }
+     
+   
   });
 
   return { props: { users } };

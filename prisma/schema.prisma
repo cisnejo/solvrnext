@@ -37,15 +37,17 @@ model Session {
 }
 
 model User {
-  id            String          @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String?         @unique
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
-  roles         String          @default("user")
+  roles         String         @default("user")
   sessions      Session[]
   Account       Account[]
-  SharedInfoTag SharedInfoTag[]
+  SharedInfoTag SharedInfoTag?
+
+   @@map("users")
 }
 
 model VerificationToken {
@@ -57,11 +59,13 @@ model VerificationToken {
 }
 
 model SharedInfoTag {
-  id          String  @id @default(cuid())
-  userId      String
+  id          String   @id @default(cuid())
   description String?
+  userId      String   @unique
   served      String?
   rating      Int?
   available   Boolean?
-  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User     @relation(references: [id], fields: [userId])
+
+ @@map("sharedinfotags")
 }
