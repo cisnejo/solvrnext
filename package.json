@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "con-start": "concurrently \"next dev\"  \"pscale connect solvrsrc main --port 3309\" \"npx prisma studio\" "
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.4",

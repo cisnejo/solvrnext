@@ -3,13 +3,17 @@ import { useEffect, useState } from "react";
 
 import { prisma } from "../db/client";
 
+interface users {
+  users: Array<SharedInfoTag>,
+}
 export function ProfileList(users: any) {
   const [userProfiles, setUserProfiles] = useState({});
+
   const listings = users.users.map((user: SharedInfoTag) => (
-    <>
+    <div>
       <div>Description: {user.description}</div>
       <div>Rating: {user.rating}</div>
-    </>
+    </div>
   ));
 
   return (
