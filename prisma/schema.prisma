@@ -45,7 +45,7 @@ model User {
   roles         String         @default("user")
   sessions      Session[]
   Account       Account[]
-  SharedInfoTag SharedInfoTag?
+  sharedinfotags SharedInfoTag?
 
    @@map("users")
 }
@@ -61,11 +61,11 @@ model VerificationToken {
 model SharedInfoTag {
   id          String   @id @default(cuid())
   description String?
-  userId      String   @unique
+  userId      String?   @unique
   served      String?
   rating      Int?
   available   Boolean?
-  user        User     @relation(references: [id], fields: [userId])
+  user        User?     @relation(references: [id], fields: [userId])
 
  @@map("sharedinfotags")
 }
